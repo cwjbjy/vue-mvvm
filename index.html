@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h1>{{person.name}} -- {{person.age}}</h1>
+        <div v-text="msg"></div>
+        <div v-text="person.name"></div>
+        <div v-html="htmlStr"></div>
+        <input type="text" v-model="msg"/>
+        <button v-on:click="onClick">指令点击</button>
+        <button @click="onClick">缩写点击</button>
+        <img v-bind:src="imgSrc" v-bind:alt="altTitle">
+        <ul>
+            <li>cookie</li>
+            <li>local</li>
+            <li>session</li>
+        </ul>
+    </div>
+    <script src="./MVue.js"></script>
+    <script>
+        new Mvue({
+            el:'#app',
+            data:{
+                person:{
+                    name:"张三",
+                    age:'20'
+                },
+                msg:'vue响应式原理',
+                htmlStr:'<b>bold</b>',
+                imgSrc:'http://www.baidu.com/baidu.php?url=K00000K3Zd4fCW_uEJPAvCAzXtUPre7KW8u_ydIhl922SYZdzQFcc6cITuxU1bfLhcvXQfl5BM392nCtELFUPropKzX7U-DpJC0QgHHEpLL0KtuvGtuCWY-1AJIidZn8PxjRuksPdbf4yhTtBTEaw80kfVKrmCpYVjHJrUakMxrDBBMT5tMh69-M1l6OvQJ7RxOu3MDEJjHBn0jHtG1s3jJc6_jz.7D_NR2Ar5Od663rj6tVv1AS7DAPtnQPKnAeWM_1vTSqjDkggug3eVOgKfYt_U_DY2yQvTyjo6CpXgih4SjikjW9l32AM-9uY3vglCh54EOGOGO3Zt1SZo6CpXy7YNKnNKWSUOlxlxSKOnO9Oz5lZeZqoo6CpXy6hUikOnO9OpOLqmeCp5UBmqEltMl-X4Ll-XegSySU4I5VWIdhH7enDgQCI6Jsn_un-xH_LNoDk3eQQQnMugzd4ryG-LQWdQjPakbvUPhqf.U1Yk0ZDq1U1Ao0Kspynqn0KsTv-MUWYvuWNhPW01m19hrHD3rAw-mvRsPjPbmyfdrHmzny79u0KY5TvtkJs0pyYqnWcd0ATqUvwlnfKdpHdBmy-bIykV0ZKGujYz0APGujYYnjR0UgfqnH0krNtknjDLg1csPWFxn1msnfKopHYs0ZFY5Hm4nsKBpHYkPH9xnW0Yg1ckPdtdnjn0UynqnH0snNtkrj6YnW0LnHR1g1DdnHbLrj0kPH01g100TgKGujYs0Z7Wpyfqn0KzuLw9u1Ys0A7B5HKxn0K-ThTqn0KsTjYs0A4vTjYsQW0snj0snj0s0AdYTjYs0AwbUL0qnfKzpWYs0Aw-IWdsmsKhIjYs0ZKC5H00ULnqn0KBI1Ykn0K8IjYs0ZPl5fK9TdqGuAnqTZnVUhC0pywW5R42i-n0IA7zuvNY5Hm1g1KxnHRs0ZwdT1YkPWnzPjRkPjnLnWmYrjR1P1nsP6Kzug7Y5HDvnH6YPHmdPHRLPjf0Tv-b5H6Ynvn1nhRknj0snjnsnAc0mLPV5HRswWbzwDmLrj7Dn1T3nbc0mynqnfKsUWYs0Z7VIjYs0Z7VT1Ys0ZGY5Hc0UyPxuMFEUHYsg1Kxn7ts0Aw9UMNBuNqsUA78pyw15HKxn7tsg100TA7Ygvu_myTqn0Kbmv-b5H00ugwGujYVnfK9TLKWm1Ys0ZNspy4Wm1Ys0Z7VuWYs0AuWIgfqn0KGTvP_5H00XMK_Ignqn0K9uAu_myTqnfK_uhnqn0KbmvPb5H-ArRnLf16drHcdPjbdwHmsnDRvPjcdfWNjPRfLfW6Lxj00IZF9uARqP1msPj0k0AFbpyfqn1n4nWn1wHR4P1D1PWbkn1mdPWFDwRnvPb7KfHcLPHf0UvnqnfKBIjYs0Aq9IZTqn0KEIjYk0AqzTZfqninsc1Dsc1cWnWc1n104nj63c1csnj0sc108nj0snj0sc1DWnBnsczYWna3snjDvPW0Wni3snj0knj00TNqv5H08rHuxna3sn7tsQW0sg108njuxna3sPdtsQWnYg108PHuxnHc30AF1gLKzUvwGujYs0ZFEpyu_myTqnfKWIWY0pgPxmLK95H00mL0qn0K-TLfqn0KWThnqPjTznHc&word=&ck=1405.5.131.268.253.477.261.147&shh=www.baidu.com&sht=78000241_12_hao_pg&wd=&us=1.6504.2.0.1.398.0.101',
+                altTitle:'眼睛',
+            },
+            methods:{
+                onClick(){
+                    console.log(this)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
