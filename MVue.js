@@ -2,6 +2,14 @@ const compileUtil = {
     /* 1. v-text指令
     2. {{}}语法
     */
+    setValue(expr,vm,val){
+        return expr.split('.').reduce((data,currentVal)=>{
+            if(typeof data[currentVal] !== 'object'){
+                data[currentVal] = val
+            }
+            return data[currentVal]
+        },vm._data)
+    },
     getValue(expr, vm) {
         return expr.split('.').reduce((data, currentVal) => {
             return data[currentVal]
@@ -42,6 +50,17 @@ const compileUtil = {
 
     model(node,expr,vm){
         const value = this.getValue(expr,vm);
+
+        //数据 =》 视图
+        new Watcher(vm,expr,(newVal)=>{
+            this.updater.modelUpdater(node,newVal)
+        })
+
+        //视图 =》 数据
+        node.addEventListener('input',(e)=>{
+            this.setValue(expr,vm,e.target.value)
+        },false)
+
         this.updater.modelUpdater(node,value)
     },
 
