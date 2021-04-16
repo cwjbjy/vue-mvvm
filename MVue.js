@@ -7,10 +7,18 @@ const compileUtil = {
             return data[currentVal]
         }, vm._data)
     },
+    getContentVal(expr,vm){
+        return expr.replace(/\{\{(.+?)\}\}/g,(...args)=>{
+            return this.getValue(args[1],vm)
+        })
+    },
     text(node, expr, vm) {
         let value;
         if (expr.indexOf('{{') !== -1) {
             value = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+                new Watcher(vm,args[1],()=>{
+                    this.updater.textUpdater(node,this.getContentVal(expr,vm))
+                })
                 return this.getValue(args[1],vm)
             })
         } else {
@@ -21,6 +29,9 @@ const compileUtil = {
 
     html(node,expr,vm){
         let value = this.getValue(expr, vm)
+        new Watcher(vm,expr,(newVal)=>{
+            this.updater.htmlUpdater(node,newVal)
+        })
         this.updater.htmlUpdater(node,value)
     },
 
@@ -63,7 +74,11 @@ class Mvue {
         this.$options = options;
         //如果这个根元素存在则开始编译模板
         if (this.$el) {
+
+            new Observer(this._data)
+
             new Compile(this.$el, this)
+            
         }
     }
 }
@@ -163,6 +178,3 @@ class Compile {
         return node.nodeType === 3
     }
 }
-
-
-/* Watcher是连接Observer和Compile的桥梁 */
