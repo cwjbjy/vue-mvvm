@@ -96,8 +96,24 @@ class Mvue {
 
             new Observer(this._data)
 
+            /* 代理this._data，这样可以通过this直接访问data中的属性 */
+            this.proxyData(this._data)
+
             new Compile(this.$el, this)
             
+        }
+    }
+
+    proxyData(data){
+        for(const key in data){
+            Object.defineProperty(this,key,{
+                get(){
+                    return data[key]
+                },
+                set(newVal){
+                    data[key] = newVal
+                }
+            })
         }
     }
 }
